@@ -8,16 +8,14 @@ else()
     message(STATUS "Found Geode: $ENV{GEODE_SDK}")
 endif()
 
-add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
+# Works around an upstream fmt/Clang bug (consteval format-string checking
+# fails to compile on some newer Clang versions). This is Geode's own
+# official escape hatch for this exact problem - see geode-sdk/geode's
+# top-level CMakeLists.txt, which defines FMT_CONSTEVAL to nothing when
+# this cache var is set, before fmt gets built.
+set(GEODE_DISABLE_FMT_CONSTEVAL ON CACHE BOOL "" FORCE)
 
-# Work around an upstream fmt bug where newer Clang versions choke on
-# fmt's consteval-based format-string checking inside fmt's own source
-# (see fmtlib/fmt issues #4247 / #4264). Setting this directly on the
-# fmt target (rather than via global CMAKE_CXX_FLAGS) is what actually
-# takes effect, since fmt's CMakeLists sets its own compile options.
-if (TARGET fmt)
-    target_compile_definitions(fmt PRIVATE FMT_USE_CONSTEVAL=0)
-endif()
+add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
 file(GLOB SOURCES
     src/*.cpp
@@ -26,9 +24,5 @@ file(GLOB SOURCES
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
-
-# Same workaround for our own translation units, since they also use
-# fmt::format / log::warn which would hit the same consteval codepath.
-target_compile_definitions(${PROJECT_NAME} PRIVATE FMT_USE_CONSTEVAL=0)
 
 setup_geode_mod(${PROJECT_NAME})
