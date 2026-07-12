@@ -1,10 +1,16 @@
 #pragma once
+#include <Geode/ui/Popup.hpp>
 #include <Geode/Geode.hpp>
 #include <Geode/ui/Popup.hpp>
+#include <Geode/ui/Popup.hpp>
 #include <Geode/ui/TextInput.hpp>
+#include <Geode/ui/Popup.hpp>
 #include <Geode/ui/ScrollLayer.hpp>
+#include <Geode/ui/Popup.hpp>
 #include <matjson.hpp>
+#include <Geode/ui/Popup.hpp>
 #include <vector>
+#include <Geode/ui/Popup.hpp>
 #include <string>
 
 class AIPopup : public geode::Popup<LevelEditorLayer*> {
@@ -16,7 +22,7 @@ protected:
     cocos2d::CCLabelBMFont* m_chatLabel = nullptr;
     geode::ScrollLayer* m_scroll = nullptr;
     geode::TextInput* m_input = nullptr;
-    cocos2d::CCMenuItemSpriteExtra* m_sendBtn = nullptr;
+    geode::CCMenuItemSpriteExtra* m_sendBtn = nullptr;
     cocos2d::CCLabelBMFont* m_statusLabel = nullptr;
 
     bool setup(LevelEditorLayer* editor) override;

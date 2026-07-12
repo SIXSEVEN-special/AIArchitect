@@ -61,7 +61,7 @@ void GroqClient::sendChat(std::vector<matjson::Value> const& messageHistory, Res
     req.header("Content-Type", "application/json");
     req.bodyJSON(body);
 
-    req.post("https://api.groq.com/openai/v1/chat/completions").listen(
+    req.post("https://api.groq.com/openai/v1/chat/completions").send().listen(
         [callback](web::WebResponse* res) {
             if (!res || !res->ok()) {
                 callback(

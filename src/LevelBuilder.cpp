@@ -58,7 +58,7 @@ int LevelBuilder::buildFromJSON(
     if (!editorUI) return 0;
 
     int count = 0;
-    for (auto& obj : root["objects"].asArray().unwrapOr(std::vector<matjson::Value>{})) {
+    for (auto& obj : root["objects"].asArray().unwrapOr(matjson::Array{})) {
         if (count >= maxObjects) {
             log::info("AI Architect: hit max-build-objects cap ({}), stopping", maxObjects);
             break;
