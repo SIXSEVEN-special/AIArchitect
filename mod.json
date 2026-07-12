@@ -1,0 +1,35 @@
+{
+  "geode": "4.0.0",
+  "gd": {
+    "win": "2.206",
+    "android": "2.206"
+  },
+  "version": "v1.0.0",
+  "id": "yourname.aiarchitect",
+  "name": "AI Architect",
+  "developer": "yourname",
+  "description": "Chat with an AI (Groq) inside the level editor and let it build layouts for you from a text prompt.",
+  "tags": ["editor", "utility"],
+  "settings": {
+    "groq-api-key": {
+      "name": "Groq API Key",
+      "description": "Your personal Groq API key from console.groq.com. Stored in the mod's local settings only - never uploaded anywhere by this mod.",
+      "type": "string",
+      "default": ""
+    },
+    "groq-model": {
+      "name": "Groq Model",
+      "description": "Which Groq-hosted model to use. Example: llama-3.3-70b-versatile",
+      "type": "string",
+      "default": "llama-3.3-70b-versatile"
+    },
+    "max-build-objects": {
+      "name": "Max Objects Per Build",
+      "description": "Safety cap - the AI won't be allowed to place more than this many objects in one go.",
+      "type": "int",
+      "default": 150,
+      "min": 1,
+      "max": 1000
+    }
+  }
+}
